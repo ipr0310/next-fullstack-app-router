@@ -11,6 +11,7 @@ export default async function InvoicesTable({
   query: string;
   currentPage: number;
 }) {
+  // REMINDER: This is not a security RISK, react server components is being used here!
   const invoices = await fetchFilteredInvoices(query, currentPage);
 
   return (
