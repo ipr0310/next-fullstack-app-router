@@ -1,9 +1,6 @@
 import '@/styles/global.css';
 import { inter } from '@/styles/fonts';
 
-export const runtime = 'edge';
-export const preferredRegion = ['iad1'];
-
 export default function RootLayout({
   children,
 }: {

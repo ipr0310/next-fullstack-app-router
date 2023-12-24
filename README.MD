@@ -162,6 +162,34 @@ export default function Page() {
 }
 ```
 
+### Server Action Creation outside component
+```typescript
+'use server';
+
+export async function createInvoice(formData: FormData) {
+
+  const rawFormData = {
+    customerId: formData.get('customerId'),
+    amount: formData.get('amount'),
+    status: formData.get('status'),
+  };
+
+  const multipleEntries = Object.fromEntries(formData.entries());
+
+  // Test it out:
+  console.log({rawFormData, multipleEntries});
+
+  // {
+  //   rawFormData: {
+  //     customerId: '126eed9c',
+  //     amount: '222',
+  //     status: null
+  //   },
+  //     multipleEntries: { customerId: '126eed9c', amount: '222' }
+  //   }
+}
+```
+
 ## Credits
 - [NextJS App Router Introduction](https://nextjs.org/learn)
 - [NextJS App Router Docs](https://nextjs.org/docs)
