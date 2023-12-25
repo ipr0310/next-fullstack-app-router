@@ -1,8 +1,5 @@
 import SideNav from './_components/sidenav';
 
-export const runtime = 'edge';
-export const preferredRegion = ['iad1'];
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
