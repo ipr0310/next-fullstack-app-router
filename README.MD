@@ -11,7 +11,6 @@
 - Next.JS (App Router)
 - Auth.JS
 - Tailwind
-- Prisma + PostgreSQL
 
 ### Database
 - PostgreSQL
