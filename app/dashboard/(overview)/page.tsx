@@ -1,4 +1,5 @@
 import CardWrapper from './_components/cards';
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import {
   RevenueChartSkeleton,
@@ -8,6 +9,10 @@ import {
 import LatestInvoices from './_components/latest-invoices';
 import RevenueChart from './_components/revenue-chart';
 import { lusitana } from '@/styles/fonts';
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+};
 
 export default async function Page() {
   return (
