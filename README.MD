@@ -1,20 +1,25 @@
 # NextJS Fullstack App Router
-![alt text](course-explainer.avif "Course Explainer")
+
+![alt text](course-explainer.avif 'Course Explainer')
 
 ### Financial dashboard with the following
+
 - A public home page.
 - A login page.
 - Dashboard pages that are protected by authentication.
 - The ability for users to add, edit, and delete invoices.
 
 ### Stack
+
 - Next.JS (App Router)
 - Auth.JS
 - Tailwind
 
 ### Database
+
 - PostgreSQL
 - Relational Schema
+
 ```sql
 SELECT invoices.amount, customers.name
 FROM invoices
@@ -22,25 +27,36 @@ JOIN customers ON invoices.customer_id = customers.id
 WHERE invoices.amount = 666;
 ```
 
+### Auth
+
+Once you provide the initial seed to the database, you can run the app and login using the following credentials:
+
+- Email: user@nextmail.com
+- Password: 123456
+
 ## Using App Router to its fullest with nested routing
-![alt text](nested-routing.avif "Nested routing")
+
+![alt text](nested-routing.avif 'Nested routing')
 
 ## Route Groups
+
 <i>In the app directory, nested folders are normally mapped to URL paths. However, you can mark a folder as a Route Group to prevent the folder from being included in the route's URL path.</i>
 
-![alt text](route-group-organisation.png "Route Groups")
+![alt text](route-group-organisation.png 'Route Groups')
 
 ### Creating multiple root layouts
+
 <i>To create multiple root layouts, remove the top-level layout.js file, and add a layout.js file inside each route groups. This is useful for partitioning an application into sections that have a completely different UI or experience. The `<html>` and `<body>` tags need to be added to each root layout.</i>
 
 <i>Even though routes inside (marketing) and (shop) share the same URL hierarchy, you can create a different layout for each group by adding a layout.js file inside their folders.</i>
 
-![alt text](route-group-multiple-root-layouts.png "Multiple root layout")
+![alt text](route-group-multiple-root-layouts.png 'Multiple root layout')
 
 ### Opting specific segments into a layout
+
 <i>To opt specific routes into a layout, create a new route group (e.g. (shop)) and move the routes that share the same layout into the group (e.g. account and cart). The routes outside of the group will not share the layout (e.g. checkout).</i>
 
-![alt text](route-group-opt-in-layouts.png "Opt In Layouts")
+![alt text](route-group-opt-in-layouts.png 'Opt In Layouts')
 
 ## Making the dashboard dynamic
 
@@ -50,14 +66,14 @@ In your file, import unstable_noStore from next/cache, and call it the top of yo
 
 ```typescript
 import { unstable_noStore as noStore } from 'next/cache';
- 
+
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
   noStore();
   // ...
 }
- 
+
 export async function fetchLatestInvoices() {
   noStore();
   // ...
@@ -72,10 +88,10 @@ export async function fetchLatestInvoices() {
 const revenue = await fetchRevenue();
 
 // Wait for fetchRevenue() to finish
-const latestInvoices = await fetchLatestInvoices(); 
+const latestInvoices = await fetchLatestInvoices();
 
 // Wait for fetchLatestInvoices() to finish
-const { numberOfInvoices, numberOfCustomers } = await fetchCardData(); 
+const { numberOfInvoices, numberOfCustomers } = await fetchCardData();
 ```
 
 Satisfy a condition before making the next request
@@ -83,6 +99,7 @@ Satisfy a condition before making the next request
 <i>For example, you might want to fetch a user's ID and profile information first. Once you have the ID, you might then proceed to fetch their list of friends.</i>
 
 ### Parallel data fetching
+
 <i>A common way to avoid waterfalls is to initiate all data requests at the same time - in parallel.
 
 In JavaScript, you can use the Promise.all() or Promise.allSettled() functions to initiate all promises at the same time. For example, in data.ts, we're using Promise.all() in the fetchCardData() function:</i>
@@ -92,7 +109,7 @@ export async function fetchCardData() {
   try {
     const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;
     const customerCountPromise = sql`SELECT COUNT(*) FROM customers`;
- 
+
     const data = await Promise.all([
       invoiceCountPromise,
       customerCountPromise
@@ -121,7 +138,6 @@ Where you place your Suspense boundaries will depend on a few things:
 2. What content you want to prioritize.
 
 3. If the components rely on data fetching.
-
 
 Don't worry. There isn't a right answer.
 
@@ -153,21 +169,21 @@ export default function Page() {
   // Action
   async function create(formData: FormData) {
     'use server';
- 
+
     // Logic to mutate data...
   }
- 
+
   // Invoke the action using the "action" attribute
   return <form action={create}>...</form>;
 }
 ```
 
 ### Server Action Creation outside component
+
 ```typescript
 'use server';
 
 export async function createInvoice(formData: FormData) {
-
   const rawFormData = {
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
@@ -177,7 +193,7 @@ export async function createInvoice(formData: FormData) {
   const multipleEntries = Object.fromEntries(formData.entries());
 
   // Test it out:
-  console.log({rawFormData, multipleEntries});
+  console.log({ rawFormData, multipleEntries });
 
   // {
   //   rawFormData: {
@@ -191,5 +207,6 @@ export async function createInvoice(formData: FormData) {
 ```
 
 ## Credits
+
 - [NextJS App Router Introduction](https://nextjs.org/learn)
 - [NextJS App Router Docs](https://nextjs.org/docs)
