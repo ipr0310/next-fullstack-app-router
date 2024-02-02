@@ -30,6 +30,10 @@ export default function Page() {
           >
             <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
+
+          <p className={`${lusitana.className} text-gray-800 `}>
+            <b>Made with ❤️ by IPR0310</b>
+          </p>
         </div>
 
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
